@@ -1,0 +1,46 @@
+@module input
+@info handles input using jQuery ui
+@see http://api.jqueryui.com/
+
+#-------------------------------------------------------------------
+
+@attribute <b>data-jctype</b>
+@type string
+@description Picks the element type to be render as.
+
+@graphicexample {1. Datepicker}
+<input class="form-control"
+ data-jctype="'datepicker'">
+{1. Datepicker}
+
+@graphicexample {2. Spinner}
+<input data-jctype="'spinner'">
+{2. Spinner}
+
+@graphicexample {3. Datepicker using lang}
+<div lang="fr">
+  <input class="form-control"
+   data-jctype="'datepicker'">
+</div>
+<input lang="es" class="form-control"
+ data-jctype="'datepicker'">
+{3. Datepicker using lang}
+
+@graphicexample {4. Spinner using lang}
+<input class="form-control"
+ data-jctype="'spinner'"
+ data-spinner-format="'C'"
+ lang="en">
+<input class="form-control"
+ data-jctype="'spinner'"
+ data-spinner-format="'C'"
+ lang="ja">
+{4. Spinner using lang}
+
+#---------------------------------- META
+
+@metaattribute data-jctype-method
+@description Defines the method that is used to get the value by other modules such as ajax and ajax-request-events, if undefined, default method .val() is used.
+
+@metaattribute data-jctype-method-function
+@description Defines the function that is used to get the value via meta-attributes $(elem)[data-jctype-method-function](data-jctype-method) to retrieve the value.

@@ -1,0 +1,134 @@
+@module toggle-events
+@info provides toggle functionablity using jQuery ui effects and jQuery's toggle
+@see http://api.jqueryui.com/
+
+#--------------------------------------------------------
+
+@attribute <b>data-toggle-events</b>
+@type string
+@description This attribute defines the events that will trigger the toggling.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'mouseover'">
+  You can't click me
+</button>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute <b>data-toggle-target</b> (Alive)
+@type selector
+@description This attribute defines the target(s) that will get affected by the toggle event, by default it's the current element.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'click'"
+ data-toggle-target="'::nextAll p'">
+  Toggle Paragraphs
+</button>
+<p>paragraph</p>
+<p>paragraph</p>
+<i>Not a paragraph</i>
+<p>paragraph</p>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute data-toggle-callback (Alive)
+@type function()
+@description Runs a function once the animation is complete, the function is ran per-element.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'click'"
+ data-toggle-target="'::next p'"
+ data-toggle-callback="function(){alert('toggled')}">
+  Toggle Next
+</button>
+<p>Toggle me</p>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute data-toggle-options (Alive)
+@type object
+@description Specifies the options for the animation, check jqueryui api to see the avaliable options per animation, the animation names are the same set in data-toggle-animation.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'click'"
+ data-toggle-animation="'explode'"
+ data-toggle-target="'::next p'"
+ data-toggle-options="{'pieces':4}">
+  Toggle Next
+</button>
+<p>Toggle me</p>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute <b>data-toggle-animation</b> (Alive)
+@type string[blind,bounce,clip,drop,fade,fold,puff,pulsate,scale,shake,size,slide]
+@description Specifies the animation to use, avaliable types are those that jQuery ui supports.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'click'"
+ data-toggle-animation="'drop'"
+ data-toggle-target="'::next p'">
+  Toggle Next
+</button>
+<p>Toggle me</p>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute <b>data-toggle-duration</b> (Alive)
+@type number|string
+@description Specifies the speed that the animation will run on.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'mouseover'"
+ data-toggle-duration="'fast'">
+  Don't come close to me
+</button>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute data-toggle-just-show (Alive)
+@type boolean
+@description Instead toggling only shows an element
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'click'"
+ data-toggle-just-show="true"
+ data-toggle-target="'::next p'">
+  Show something
+</button>
+<p style="display:none">You can't hide me now</p>
+{Example}
+
+#--------------------------------------------------------
+
+@attribute data-toggle-just-hide (Alive)
+@type boolean
+@description Instead toggling only hides an element
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-toggle-events="'click'"
+ data-toggle-just-hide="true"
+ data-toggle-target="'::next p'">
+  Hide something
+</button>
+<p>Don't hide me</p>
+{Example}
+
+#--------------------------------------------------------
+
+@metaatribute data-toggle-events-binds
+@description Contains the events that were bind when the function was run, these binds are removed when .jCheetahUnloadToggleEvents is ran. Do not coerce a value.

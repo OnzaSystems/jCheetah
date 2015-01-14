@@ -1,0 +1,206 @@
+<html>
+  <head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="resources/favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+     </script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+     </script>
+    <![endif]-->
+  
+    <title>jCheetah reference</title>
+  </head>
+  <style>
+    pre {font-size : 12px}
+    .green {color : green}
+    .blue {color : blue}
+    .red {color : red}
+  </style>
+  <body>
+  
+  <div class="navbar navbar-default navbar-static-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <img src="resources/jCheetahLogo.png" height="25px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+        </a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-list">
+          <li id="general" location="general"><a href="#general">General</a></li>
+          <li id="about" location="about"><a href="#about">About</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="row container">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+      <div class="panel panel-primary">
+	<div class="panel-heading">
+	  <div class="input-group" style="padding-top:20px;padding-bottom:20px">
+	    <div class="input-group-addon">Search</div>
+	    <input class="form-control" data-ajax-events="'input'" data-ajax-onevent-reload="'#search-results'" id="search">
+	  </div>
+	</div>
+	<div class="panel-body" style="overflow-y: scroll;overflow-x: hidden;height:420px">
+	  <ul class="nav nav-pills nav-stacked" id="search-results" data-ajax-load="'json/index.json'"
+	  data-ajax-datatype="'json'" data-ajax-designer="index_designer">
+	  </ul>
+	</div>
+      </div>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" id="content" data-ajax-load="'json/::hash::.json'"
+      data-ajax-datatype="'json'" data-ajax-designer="content_designer" data-ajax-avoid-first-reloads="1"
+      style="margin-bottom:50px">
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.datepicker-es.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.datepicker-fr.js"></script>
+    <script type="text/javascript" src="js/globalize.js"></script>
+    <script type="text/javascript" src="js/globalize.culture.ja-JP.js"></script>
+    <script type="text/javascript" src="js/jquery.csv.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../jcheetah.js"></script>
+    <script>
+        addEventListener("hashchange",function(event){$("#content").jCheetahLoadAjax()});
+        location.hash = "#general";
+      var content_designer =
+"\
+<div class='jumbotron'>\
+    <h1>{{% json.module %}}</h1>\
+    <p>{{% json.info %}}</p>\
+    {{if json.see != undefined}}<a href='{{%json.see%}}' class='btn btn-danger pull-right'>See Original API</a>{{endif}}\
+</div>\
+{{% json.content %}}\
+{{if json.attributes !== undefined}}\
+    <div class='panel panel-primary'>\
+        <div class='panel-heading' style='cursor:pointer' data-toggle-events='&quot;click&quot;' data-toggle-target='&quot;::next div&quot;' data-toggle-animation='&quot;fold&quot;'>\
+            <h2>Attributes</h2>\
+        </div>\
+        <div class='panel-body' style='display:none'>\
+            {{foreach json.attributes as attributeName => data}}\
+                <div class='panel panel-default'>\
+		    <div class='panel-heading' style='cursor:pointer' data-toggle-events='&quot;click&quot;' data-toggle-target='&quot;::next div&quot;' data-toggle-animation='&quot;fold&quot;'>\
+                        <h3>{{% attributeName %}}</h3>\
+	            </div>\
+                    <div class='panel-body' style='display:none'>\
+                        {{if json.attributes[attributeName].description != undefined}}\
+                            <p>{{% json.attributes[attributeName].description %}}</p>\
+                        {{endif}}\
+                        {{if json.attributes[attributeName].type != undefined}}\
+                            <h5><b>Type</b></h5>\
+			    <ul>\
+			        {{foreach json.attributes[attributeName].type as index => type}}\
+                                    <li>{{% type %}}</li>\
+                                {{endforeach}}\
+                            </ul>\
+                        {{endif}}\
+                        {{if json.attributes[attributeName].examples != undefined}}\
+                            <h5><b>Examples</b></h5>\
+			        {{foreach json.attributes[attributeName].examples as title => example}}\
+                                    <div class='panel panel-default'>\
+					<div class='panel-heading'>{{% title %}}</div>\
+					<div class='panel-body'><pre><code>{{% example %}}</code></pre></div>\
+                                    </div>\
+                                {{endforeach}}\
+                        {{endif}}\
+                    </div>\
+		</div>\
+            {{endforeach}}\
+        </div>\
+    </div>\
+{{endif}}\
+{{if json.functions != undefined}}\
+    <div class='panel panel-success'>\
+        <div class='panel-heading' style='cursor:pointer' data-toggle-events='&quot;click&quot;' data-toggle-target='&quot;::next div&quot;' data-toggle-animation='&quot;fold&quot;'>\
+            <h2>Functions</h2>\
+        </div>\
+        <div class='panel-body' style='display:none'>\
+            {{foreach json.functions as functionName => data}}\
+                <div class='panel panel-default'>\
+		    <div class='panel-heading' style='cursor:pointer' data-toggle-events='&quot;click&quot;' data-toggle-target='&quot;::next div&quot;' data-toggle-animation='&quot;fold&quot;'>\
+                        <h3>{{% functionName %}}</h3>\
+	            </div>\
+                    <div class='panel-body' style='display:none'>\
+                        {{if json.functions[functionName].description != undefined}}\
+                            <p>{{% json.functions[functionName].description %}}</p>\
+                        {{endif}}\
+                        {{if json.functions[functionName].args != undefined}}\
+                            <h5><b>Args</b></h5>\
+			    <ul>\
+			        {{foreach json.functions[functionName].args as index => arg}}\
+                                    <li>{{% arg %}}</li>\
+                                {{endforeach}}\
+                            </ul>\
+                        {{endif}}\
+                        {{if json.functions[functionName].returns != undefined}}\
+                            <b>{{% json.functions[functionName].returns %}}</b>\
+                        {{endif}}\
+                        {{if json.functions[functionName].examples != undefined}}\
+                            <h5><b>Examples</b></h5>\
+			        {{foreach json.functions[functionName].examples as title => example}}\
+                                    <div class='panel panel-default'>\
+					<div class='panel-heading'>{{% title %}}</div>\
+					<div class='panel-body'><pre><code>{{% example %}}</code></pre></div>\
+                                    </div>\
+                                {{endforeach}}\
+                        {{endif}}\
+                    </div>\
+		</div>\
+            {{endforeach}}\
+        </div>\
+    </div>\
+{{endif}}\
+{{if json[\"meta-attributes\"] != undefined}}\
+    <div class='panel panel-info'>\
+        <div class='panel-heading' style='cursor:pointer' data-toggle-events='&quot;click&quot;' data-toggle-target='&quot;::next div&quot;' data-toggle-animation='&quot;fold&quot;'>\
+            <h2>Meta Attributes</h2>\
+        </div>\
+        <div class='panel-body' style='display:none'>\
+            {{foreach json[\"meta-attributes\"] as metaName => data}}\
+                <div class='panel panel-default'>\
+		    <div class='panel-heading' style='cursor:pointer' data-toggle-events='&quot;click&quot;' data-toggle-target='&quot;::next div&quot;' data-toggle-animation='&quot;fold&quot;'>\
+                        <h3>{{% metaName %}}</h3>\
+	            </div>\
+                    <div class='panel-body' style='display:none'>\
+                        {{if json[\"meta-attributes\"][metaName].description != undefined}}\
+                            <p>{{% json[\"meta-attributes\"][metaName].description %}}</p>\
+                        {{endif}}\
+                        {{if json[\"meta-attributes\"][metaName].examples != undefined}}\
+                            <h5><b>Examples</b></h5>\
+			        {{foreach json[\"meta-attributes\"][metaName].examples as title => example}}\
+                                    <div class='panel panel-default'>\
+					<div class='panel-heading'>{{% title %}}</div>\
+					<div class='panel-body'><pre><code>{{% example %}}</code></pre></div>\
+                                    </div>\
+                                {{endforeach}}\
+                        {{endif}}\
+                    </div>\
+		</div>\
+            {{endforeach}}\
+        </div>\
+    </div>\
+{{endif}}\
+"
+        var index_designer =
+"\
+{{foreach json as index => name}}\
+    {{if name.replace(\"#\",\"\").indexOf($(\"#search\").val().toLowerCase()) != -1'}}\
+        <li><a href='{{% name %}}'>Module {{% name.replace(\"#\",\"\") %}}<span class='pull-right'>&gt;</span><p style='font-size:8px'></a></li>\
+    {{endif}}\
+{{endforeach}}\
+"
+    </script>
+  
+  </body>
+</html>

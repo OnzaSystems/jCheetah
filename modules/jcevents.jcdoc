@@ -1,0 +1,174 @@
+@module jcevent
+@info Performs functions based on event listeners using jQuery's bind.
+@see https://github.com/jqapi/jqapi#p=bind
+
+#---------------------------------------------------------------
+
+@attribute <b>jcevent</b>
+@type string
+@description Picks the events that will be bind to the function.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="alert"
+ data-jcevent-args="['ouch']"
+ data-jcevent-send-event-and-target="false"
+ data-jcevent-context="window">
+  Click me, carefully...
+</button>
+{Example}
+
+#---------------------------------------------------------------
+
+@attribute <b>data-jcevent-target</b> (Alive)
+@type selector
+@description Picks a target for the function to run, this is useful for contextual calls using data-jcevent-function as string or when you define your own functions and wish to pick a target. By default the target is the current element. Note that data-jcevent-target will be sent as an instance of jQuery.
+
+@graphicexample {1. Example}
+<div>Hello</div>
+<button class="btn btn-primary btn-lg"
+ data-jcevent-target="'::prev div'"
+ data-jcevent="'click'" data-jcevent-function="'text'"
+ data-jcevent-args="['New text']">
+  Set new text
+</button>
+{1. Example}
+
+@graphicexample {2. Example}
+<div id="hellodivitem123">Hello</div>
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'"
+ data-jcevent-target="'#hellodivitem123'"
+ data-jcevent-function="function(event,target,arg,arg2){target.text(arg + arg2)}"
+ data-jcevent-args="['New text',' with more args']">
+  Set new text
+</button>
+{2. Example}
+
+#---------------------------------------------------------------
+
+@attribute <b>jcevent-function</b> (Alive)
+@type string|function
+@description As a string it performs $(data-jcevent-target)[data-jcevent-function](data-jcevent-args...). As a function it will perform either data-jcevent-function(event,data-jcevent-target,data-jcevent-args...) or data-jcevent-function(data-jcevent-args...) depending if data-jcvent-send-event-and-target is set to true.
+
+@graphicexample {1. Example}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="alert"
+ data-jcevent-args="['ouch']"
+ data-jcevent-send-event-and-target="false"
+ data-jcevent-context="window">
+  Click me, carefully...
+</button>
+{1. Example}
+
+@graphicexample {2. Log everything}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="console.log"
+ data-jcevent-args="[1,2,3]" data-jcevent-context="console">
+  Click me
+</button>
+{2. Log everything}
+
+@graphicexample {3. Change self html}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="'html'"
+ data-jcevent-args="['&lt;b&gt;Ouch&lt;/b&gt;']">
+  Click me, carefully...
+</button>
+{3. Change self html}
+
+#---------------------------------------------------------------
+
+@attribute <b>data-jcevent-args</b> (Alive)
+@type array
+@description An array with the arguments to be send to the function, if jcevent-send-event-and-target is set to true and jcevent-function is a function, the real arugments sent will be jcevent-function(event,jcevent-target,jcevent-args...), otherwise jcevent-function(jcevent-args...).
+
+@graphicexample {1. Log everything}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="console.log"
+ data-jcevent-args="[1,2,3]" data-jcevent-context="console">
+  Click me
+</button>
+{1. Log everything}
+
+@graphicexample {2. Log 1,2,3}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="console.log"
+ data-jcevent-args="[1,2,3]" data-jcevent-context="console"
+ data-jcevent-send-event-and-target="false">
+  Click me
+</button>
+{2. Log 1,2,3}
+
+#---------------------------------------------------------------
+
+@attribute data-jcevent-run-times (Alive)
+@type number
+@description The amount of times this event will be run.
+
+@graphicexample {1. Five times event}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="alert"
+ data-jcevent-args="['clicked']"
+ data-jcevent-send-event-and-target="false"
+ data-jcevent-run-times="5"
+ data-jcevent-context="window">
+  Click me
+</button>
+{1. Five times event}
+
+#---------------------------------------------------------------
+
+@attribute data-jcevent-context (Alive)
+@type anything
+@description The context in which the function is run, this is only applicable when data-jcevent-function is not a string, by default the context is the current element.
+
+@graphicexample {Log everything}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="console.log"
+ data-jcevent-args="[1,2,3]" data-jcevent-context="console">
+  Click me
+</button>
+{Log everything}
+
+#---------------------------------------------------------------
+
+@attribute data-jcevent-send-event-and-target (Alive)
+@type boolean
+@description Defines is the args send to a function, will be be data-jcevent-function(event,data-jcevent-target,data-jcevent-args...) or data-jcevent-function(data-jcevent-args...), this is only applicable when data-jcevent-function is not a string, by default this is true.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="alert"
+ data-jcevent-args="['ouch']"
+ data-jcevent-send-event-and-target="false"
+ data-jcevent-context="window">
+  Click me, carefully...
+</button>
+{Example}
+
+@graphicexample {Bad Example}
+<!-- I'm alerting the event as alert(event,target,args...) is being run -->
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'" data-jcevent-function="alert"
+ data-jcevent-args="['ouch']"
+ data-jcevent-context="window">
+  Click me, carefully...
+</button>
+{Bad Example}
+
+#---------------------------------------------------------------
+
+@metaattribute data-jcevent-n
+@description Expresses the amount of times the event has been triggered.
+
+@graphicexample {Example}
+<button class="btn btn-primary btn-lg"
+ data-jcevent="'click'"
+ data-jcevent-function="function(event,target){alert(event.currentTarget.attributes['data-jcevent-n'].value)}">
+  Click me
+</button>
+{Example}
+
+@metaattribute data-jcevent-binds
+@description Holds the binds that were added to the element.

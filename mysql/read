@@ -1,0 +1,26 @@
+To build on Linux:
+	gcc -o lib_mysqludf_jcheetah.so lib_mysqludf_jcheetah.cpp `mysql_config --cflags` -shared -fPIC 
+
+To build on Mac:
+	gcc -o lib_mysqludf_jcheetah.so lib_mysqludf_jcheetah.cpp `mysql_config --cflags` -bundle
+	
+To build on Windows:
+	-> Create a new project on Visual C++
+	-> Add or Create the .cpp file
+	-> Set the Configuration Type to Dynamic Library; in Property Pages->Configuration Properties->General
+	-> Create a definitions file that list the functions this may look like:
+
+EXPORTS
+    json_init
+    json_deinit
+    json_clear
+    json_add
+    json
+    csv_init
+    csv_deinit
+    csv_clear
+    csv_add
+    csv
+    
+	-> Add this file to the linker configuration, field Module Definition Library; in Property Pages->Configuration Properties
+	-> Compile the udf, and name it lib_mysqludf_jcheetah.dll

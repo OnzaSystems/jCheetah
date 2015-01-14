@@ -1,0 +1,482 @@
+@module ajax
+@info Loads html/json/xml/csv external data in the current document, allows client side templating.
+@see https://github.com/jqapi/jqapi#p=jQuery.ajax
+
+#-----------------------------------------------------------------------
+
+@attribute <b>data-ajax-load</b>
+@type string
+@description Loads the given url, "::hash::" is translated to the current hash.
+
+@example {1. test.html}
+<html>
+  <body>
+    <p>some content here</p>
+  </body>
+</html>
+{1. test.html}
+
+@example {2. Loading}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"></div>
+  </body>
+</html>
+{2. Loading}
+
+@example {3. Result}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'">
+      <p>some content here</p>
+    </div>
+  </body>
+</html>
+{3. Result}
+
+@graphicexample {4. Graphic Example}
+<div data-ajax-load="'resources/ajax.html'"></div>
+{4. Graphic Example}
+
+#-----------------------------------------------------------------------
+
+@attribute <b>data-ajax-method</b>
+@type string[get,post]
+@description Method to be used, by default it's set to GET.
+
+@example {1. Sending GET request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'">
+    </div>
+  </body>
+</html>
+{1. Sending GET request}
+
+@example {2. Sending POST request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-method="'post'">
+    </div>
+  </body>
+</html>
+{2. Sending POST request}
+
+@graphicexample {4. Graphic Example}
+<div data-ajax-load="'resources/ajax-post.html'"
+data-ajax-method="'post'"></div>
+{4. Graphic Example}
+
+#-------------------------------------------------------------------------
+
+@attribute <b>data-ajax-query</b>
+@type object
+@description (from jqapi) Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests.
+
+@example {1. Sending GET request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query="{someparam:1,otherparam:'somedata'}">
+    </div>
+  </body>
+</html>
+{1. Sending GET request}
+
+@example {2. Sending POST request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query="{someparam:1,otherparam:'somedata'}"
+     data-ajax-method="'post'">
+    </div>
+  </body>
+</html>
+{2. Sending POST request}
+
+@example {3. Results}
+POST:
+   someparam : 1
+   otherparam : somedata
+GET:
+   test.html?someparam=1&otherparam=somedata
+{3. Results}
+
+#-------------------------------------------------------------------------
+
+@attribute <b>data-ajax-query-_*_</b>
+@type anything
+@description (metaobject) Can be mixed with data-ajax-query (from jqapi) Data to be sent to the server. It is converted to a query string, if not already a string. It's appended to the url for GET-requests.
+
+@example {1. Sending GET request}
+<html>
+  <body>
+    <div ajax-load="'test.html'"
+     data-ajax-query-_someparam_="1"
+     data-ajax-query-_otherparam_="'somedata'">
+    </div>
+  </body>
+</html>
+{1. Sending GET request}
+
+@example {2. Sending POST request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query-_someparam_="1"
+     data-ajax-query-_otherparam_="'somedata'"
+     data-ajax-method="'post'">
+    </div>
+  </body>
+</html>
+{2. Sending POST request}
+
+@example {3. Results}
+POST:
+   someparam : 1
+   otherparam : somedata
+GET:
+   test.html?someparam=1&otherparam=somedata
+{3. Results}
+
+#--------------------------------------------------------------------------
+
+@attribute data-ajax-number-id
+@type number
+@description Contains an integer identifier that is send along the ajax request, the parameter name is 'id'.
+
+@example {1. Sending GET request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query="{someparam:1,otherparam:'somedata'}"
+     data-ajax-number-id="10">
+    </div>
+  </body>
+</html>
+{1. Sending GET request}
+
+@example {2. Sending POST request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query="{someparam:1,otherparam:'somedata'}"
+     data-ajax-method="'post'"
+     data-ajax-number-id="10">
+    </div>
+  </body>
+</html>
+{2. Sending POST request}
+
+@example {3. Results}
+POST:
+   someparam : 1
+   otherparam : somedata
+   id : 10
+GET:
+   test.html?someparam=1&otherparam=somedata&id=10
+{3. Results}
+
+#-----------------------------------------------------------------------------
+
+@attribute data-ajax-filter
+@type string
+@description Contains an string identifier that is send along the ajax request, the parameter name is 'filter'.
+
+@example {1. Sending GET request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query="{someparam:1,otherparam:'somedata'}"
+     data-ajax-number-id="10"
+     data-ajax-filter="'data'">
+    </div>
+  </body>
+</html>
+{1. Sending GET request}
+
+@example {2. Sending POST request}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-query="{someparam:1,otherparam:'somedata'}"
+     data-ajax-method="'post'"
+     data-ajax-number-id="10"
+     data-ajax-filter="'data'">
+    </div>
+  </body>
+</html>
+{2. Sending POST request}
+
+@example {3. Results}
+POST:
+   someparam : 1
+   otherparam : somedata
+   id : 10
+   filter : data
+GET:
+   test.html?someparam=1&otherparam=somedata&id=10&filter=data
+{3. Results}
+
+#-------------------------------------------------------------------------------
+
+@attribute <b>data-ajax-onload-done</b>
+@type function(PlainObject data,String textStatus,jqXHR jqXHR)
+@description (from jqapi) A function to be called if the request succeeds. The function gets passed three arguments: The data returned from the server, formatted according to the dataType parameter; a string describing the status; and the jqXHR (in jQuery 1.4.x, XMLHttpRequest) object. As of jQuery 1.5, the success setting can accept an array of functions. Each function will be called in turn. This is an Ajax Event.
+
+@example {Alert on done}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-onload-done="alertMe">
+    </div>
+    <script>
+      var alertMe = function(data,status) {
+        alert("Load successful, status : " + status);
+      }
+    </script>
+  </body>
+</html>
+{Alert on done}
+
+@graphicexample {Graphic Example}
+<div data-ajax-load="'resources/ajax.html'"
+ data-ajax-onload-done="function(data,status,jqXHR){$('#status-ajax-done').text(status)}">
+</div>
+<p id="status-ajax-done"></p>
+{Graphic Example}
+
+#---------------------------------------------------------------------------------
+
+@attribute <b>data-ajax-onload-fail</b>
+@type function(jqXHR jqXHR,String textStatus,String errorThrown) 
+@description (from jqapi) A function to be called if the request fails. The function receives three arguments: The jqXHR (in jQuery 1.4.x, XMLHttpRequest) object, a string describing the type of error that occurred and an optional exception object, if one occurred. Possible values for the second argument (besides null) are "timeout", "error", "abort", and "parsererror". When an HTTP error occurs, errorThrown receives the textual portion of the HTTP status, such as "Not Found" or "Internal Server Error." As of jQuery 1.5, the error setting can accept an array of functions. Each function will be called in turn. Note:This handler is not called for cross-domain script and cross-domain JSONP requests. This is an Ajax Event. 
+
+@example {Alert on fail}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-onload-fail="alertMe">
+    </div>
+    <script>
+      var alertMe = function(jqXHR,status,error) {
+        alert("Load failed, with error : " + error);
+      }
+    </script>
+  </body>
+</html>
+{Alert on fail}
+
+@graphicexample {Graphic Example}
+<div data-ajax-load="'resources/not-exist.html'"
+ data-ajax-onload-fail="function(data,status,error){$('#status-ajax-fail').text(status)}">
+</div>
+<p id="status-ajax-fail"></p>
+{Graphic Example}
+
+#--------------------------------------------------------------------------------
+
+@attribute <b>data-ajax-onload-always</b>
+@type function(jqXHR jqXHR,String textStatus)
+@description (from jqapi) A function to be called when the request finishes (after success and error callbacks are executed). The function gets passed two arguments: The jqXHR (in jQuery 1.4.x, XMLHTTPRequest) object and a string categorizing the status of the request ("success", "notmodified", "error", "timeout", "abort", or "parsererror"). As of jQuery 1.5, the complete setting can accept an array of functions. Each function will be called in turn. This is an Ajax Event.
+
+@example {Always alert}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     ajax-onload-always="alertMe">
+    </div>
+    <script>
+      var alertMe = function(jqXHR,status) {
+        alert("The status was",status);
+      }
+    </script>
+  </body>
+</html>
+{Always alert}
+
+@graphicexample {Graphic Example}
+<div data-ajax-load="'resources/not-exist.html'"
+ data-ajax-onload-always="function(jqXHR,status){$('#status-ajax').text(status)}">
+</div>
+<p id="status-ajax"></p>
+{Graphic Example}
+
+#--------------------------------------------------------------------------------
+
+@attribute <b>data-ajax-onload-reload</b>
+@type selector
+@description Once this ajax is loaded the target(s) defined in this attribute would be loaded too
+
+@example {1. Reloading using id}
+<html>
+  <body>
+    <div id="ajax1" data-ajax-load="'test.html'"
+     data-ajax-onload-reload="'#ajax2'">
+    <div id="ajax2"
+     data-ajax-load="'test.html'">
+    </div>
+  </body>
+</html>
+{1. Reloading using id}
+
+@example {2. Reloading using traversing selector}
+<html>
+  <body>
+    <div id="ajax1" data-ajax-load="'test.html'"
+     data-ajax-onload-reload="'::next div'">
+    <div id="ajax2"
+     data-ajax-load="'test.html'">
+    </div>
+  </body>
+</html>
+{2. Reloading using traversing selector}
+
+@example {3. Reloading using complex selector}
+<html>
+  <body>
+    <div id="ajax1" data-ajax-load="'test.html'"
+     data-ajax-onload-reload="$('div')[1]">
+    <div id="ajax2"
+     data-ajax-load="'test.html'">
+    </div>
+  </body>
+</html>
+{3. Reloading using complex selector}
+
+@graphicexample {Graphic Example}
+<div data-ajax-load="'resources/ajax.html'"
+data-jcevent="'click'"
+data-jcevent-function="function(){alert('loaded: ' + $(this).attr('data-ajax-n') + ' times')}">
+</div>
+
+<div data-ajax-load="'resources/ajax.html'"
+data-ajax-onload-reload="'::prev div'"
+data-jcevent="'click'"
+data-jcevent-function="function(){alert('loaded: ' + $(this).attr('data-ajax-n') + ' times')}">
+</div>
+{Graphic Example}
+
+#--------------------------------------------------------------------------------
+
+@attribute <b>data-ajax-input-group</b>
+@type selector
+@description Will use those inputs as part of the data, using the attribute "name" as the parameter name and the value as the parameter value, checkboxes and radios without values will send an empty string.
+
+@example {1. Loading}
+<html>
+  <body>
+    <div data-ajax-load="'test.html'"
+     data-ajax-input-group="'input'">
+    <input name="text" type="text" value="my current text">
+    <input name="checkbox" type="checkbox" checked="checked">
+    <input name="checkbox2" type="checkbox">
+  </body>
+</html>
+{1. Loading}
+
+@example {2. Resulting query}
+GET:
+    test.html?text=my%22current%22text&checkbox
+{2. Resulting query}
+
+#--------------------------------------------------------------------------------
+
+@attribute data-ajax-datatype
+@type string[html,xml,json,csv]
+@description The datatype to get and that the ajax module can handle, note that csv needs from jQuery csv; also when you set the ajax-datatype for something different to html, you must set the attribute ajax-designer or it'll throw an error.
+
+#--------------------------------------------------------------------------------
+
+@attribute <b>data-ajax-designer</b>
+@type string
+@description This is the main piece of the ajax module, it contains html-like data that is used to parse json/xml/csv data, it uses special "designer" template tags, as {{% outvar %}}; {{ foreach items as key => val }}{{endfor}} and {{ if condition }}{{endif}}
+
+@graphicexample {Graphic Example}
+<table class="table"
+data-ajax-load="'resources/ajax.csv'"
+data-ajax-datatype="'csv'"
+data-ajax-designer="designer_example">
+</table>
+
+<script>
+      var designer_example =
+'\
+<tbody>\
+  {{foreach csv as row_id => row_data}}\
+    <tr>\
+      {{foreach row_data as item_id => item}}\
+        {{if row_id == 0}}\
+          <th style="cursor:pointer"\
+           data-toggle-events="&quot;click&quot;"\
+           data-toggle-target="&quot;::parent ::nextAll&quot;"\
+           data-toggle-animation="&quot;fade&quot;" attribute="{{%item%}}">\
+            {{%item%}}\
+          </th>\
+        {{endif}}\
+        {{if row_id > 0}}\
+          <td>\
+            {{%item%}}\
+          </td>\
+        {{endif}}\
+      {{endforeach}}\
+    </tr>\
+  {{endforeach}}\
+</tbody>\
+';
+</script>
+{Graphic Example}
+
+@graphicexample {Graphic Example 2}
+<div data-ajax-load="'resources/ajax.json'"
+data-ajax-datatype="'json'"
+data-ajax-designer="'this is version {{%json.version%}} of {{%json.software%}}'">
+</div>
+{Graphic Example 2}
+
+#--------------------------------------------------------------------------------
+
+@attribute data-ajax-avoid-first-loads
+@type number
+@description Ommits the firsts "n" calls to reload this item.
+
+@graphicexample {Graphic Example}
+<!-- when the second element loads it will override whatever we've loaded here
+so we'd rather avoid the first load -->
+<div data-ajax-load="'resources/ajax.html'"
+data-jcevent="'click'"
+data-jcevent-function="function(){alert('loaded: '+($(this).attr('data-ajax-n')-1)+' times')}"
+data-ajax-avoid-first-loads="1">
+</div>
+
+<div data-ajax-load="'resources/ajax.html'"
+data-ajax-onload-reload="'::prev div'"
+data-jcevent="'click'"
+data-jcevent-function="function(){alert('loaded: ' + $(this).attr('data-ajax-n') + ' times')}">
+</div>
+{Graphic Example}
+
+#---------------------- META
+
+@metaattribute data-ajax-n
+@description Number of times the current element has been called to reload.
+
+@example {Alert}
+<html>
+  <body>
+    <div id="myajax"
+     data-ajax-load="'test.html'"
+     data-ajax-onload-always="alertMe">
+    </div>
+    <script>
+      var alertMe = function() {
+        alert("I have been loaded " + $("#myajax").attr("data-ajax-n") + " times");
+      }
+    </script>
+  </body>
+</html>
+{Alert}
+
+@function .jCheetahLoadAjax
+@description Loads the jCheetah ajax, this function is run automatically for every DOM element and when is trigger via module ajax-events

@@ -1,0 +1,7 @@
+@module form-validate-activation
+@info Activates formValidate tags in an html element, requires from formValidate.
+@see http://bootstrapvalidator.com/
+
+@attribute data-activate-form-validation
+@type none
+@description Runs $(element).formValidation(); in the current element.

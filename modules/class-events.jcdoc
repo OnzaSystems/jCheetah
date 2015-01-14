@@ -1,0 +1,205 @@
+@module class-events
+@info This module allows you to switch classes via switchClass jQuery's ui functionability, if add-class-animation-timing is not set it uses addClass and removeClass instead.
+@see http://api.jqueryui.com/
+
+#--------------------------------------------------------------------------------------
+
+@attribute <b>data-add-class-on-click</b> (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a click event, in the case of a reversible class event (true by default), the classes are reversed to its original state via another click.
+
+@graphicexample {Example}
+<button class="btn btn-success btn-lg"
+ data-add-class-on-click="{'add':'btn-primary','remove':'btn-success'}">
+ click me
+</button>
+{Example}
+
+#------------------------------------------------------------------------------------
+
+@attribute data-add-class-on-dblclick (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a double click event, in the case of a reversible class event (true by default), the classes are reversed to its original state via another double click.
+
+@graphicexample {Example}
+<button class="btn btn-success btn-lg"
+ data-add-class-on-dblclick="{'add':'btn-primary','remove':'btn-success'}">
+ double click me
+</button>
+{Example}
+
+#-----------------------------------------------------------------------------------
+
+@attribute data-add-class-on-mouseover (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a mouseenter event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a mouseleave event.
+@graphicexample {Example}
+<button class="btn btn-success btn-lg"
+ data-add-class-on-mouseover="{'add':'btn-primary','remove':'btn-success'}">
+ hover me
+</button>
+{Example}
+
+#----------------------------------------------------------------------------
+
+@attribute data-add-class-on-move (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a movestart event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a mouseleave event.
+
+#----------------------------------------------------------------------------
+
+@attribute data-add-class-on-resize (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a resizestart event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a resizeend event.
+
+#----------------------------------------------------------------------------
+
+@attribute data-add-class-on-focus (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a focusin event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a focusout event.
+
+@graphicexample {Example}
+<input class="form-control"
+ data-add-class-on-focus="'green'"
+ data-add-class-animation-timing="1000"
+ value="focus me">
+{Example}
+
+#----------------------------------------------------------------------------
+
+@attribute data-add-class-on-drag (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a dragstart event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a dragend event.
+
+#----------------------------------------------------------------------------
+
+@attribute data-add-class-on-play (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a play event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a pause event.
+
+#----------------------------------------------------------------------------
+
+@attribute data-add-class-on-keypress (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a keydown event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a keyup event.
+
+@graphicexample {Example}
+<input class="form-control"
+ data-add-class-on-keypress="'red'"
+ value="Hold a key here">
+{Example}
+
+#----------------------------------------------------------------------------
+
+@attribute add-class-on-mousepress (Alive)
+@type string|object{'add':'classes-to-add','remove':'classes-to-remove'}
+@description Specifies a class change that is triggered on a mousedown event, in the case of a reversible class event (true by default), the classes are reversed to its original state via a mouseup event.
+
+@graphicexample {Example}
+<button class="btn btn-success btn-lg"
+ data-add-class-on-mousepress="{'add':'btn-primary','remove':'btn-success'}">
+ click me
+</button>
+{Example}
+
+#----------------------------------------------------------------------------
+
+@attribute <b>data-add-class-target</b> (Alive)
+@type selector
+@description Sets the element that will get the class change.
+
+@graphicexample {Example}
+<button class="btn btn-success btn-lg"
+ data-add-class-on-click="'red'"
+ data-add-class-target="'::siblings b'"
+ data-add-class-animation-timing="400">
+ Give 'em color
+</button>
+<b>Colorize me</b>
+<i>I don't want color</i>
+<b>Colorize me</b>
+<b>Colorize me</b>
+{Example}
+
+#-----------------------------------------------------------------------------
+
+@attribute <b>data-add-class-reversible</b> (Alive)
+@type boolean
+@description Sets if the animation can be reversed, by default it's set to true.
+
+@graphicexample {Example}
+<button class="btn btn-success btn-lg"
+ data-add-class-on-mouseover="{'add':'btn-primary','remove':'btn-success'}"
+ data-add-class-reversible="false">
+ hover me
+</button>
+{Example}
+
+#-----------------------------------------------------------------------------
+
+@attribute <b>data-add-class-animation-timing</b> (Alive)
+@type number
+@description Sets the duration of the animation (in milliseconds), requires jQuery ui.
+
+@graphicexample {Example}
+<button data-add-class-on-mouseover="'red'"
+ data-add-class-reversible="false"
+ data-add-class-animation-timing="8000">
+ hover me, slowly I'll turn red
+</button>
+{Example}
+
+#-----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-click-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+#------------------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-dblclick-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#-----------------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-mouseover-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-move-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-resize-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-focus-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-drag-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-play-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-keypress-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#----------------------------------------------------------------------------
+
+@metaattribute data-add-class-on-mousepress-status
+@description 0 specifies that the class-change haven't been set as the event hasn't been triggered, 1 specifies that the new class has been set and it's to be reversed.
+
+#-----------------------------------------------------------------------------
+
+@function .jCheetahSwitchClass
+@args old_class,new_class
+@description replaces an old_class with a new class

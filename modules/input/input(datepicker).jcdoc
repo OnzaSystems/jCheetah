@@ -1,0 +1,318 @@
+@module input(datepicker)
+@info Handles datepicker fields using jQuery's ui datepicker, widget creation is language sensitive, make sure you import the regional for the locale used if you're using the HTML attribute lang.
+@see http://api.jqueryui.com/datepicker.html
+
+@attribute data-datepicker-alt-field
+@type selector
+@description (from jqueryui api) An input element that is to be updated with the selected date from the datepicker. Use the altFormat option to change the format of the date within this field. Leave as blank for no alternate field.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-alt-format
+@type string
+@description (from jqueryui api) The dateFormat to be used for the altField option. This allows one date format to be shown to the user for selection purposes, while a different format is actually sent behind the scenes. For a full list of the possible formats see the formatDate function.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-append-text
+@type string
+@description (from jqueryui api) The text to display after each date field, e.g., to show the required format.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-append-text
+@type string
+@description (from jqueryui api) The text to display after each date field, e.g., to show the required format.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-autosize
+@type boolean
+@description (from jqueryui api) Set to true to automatically resize the input field to accommodate dates in the current dateFormat.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-before-show
+@type function(element input,object inst)
+@description (from jqueryui api) A function that takes an input field and current datepicker instance and returns an options object to update the datepicker with. It is called just before the datepicker is displayed.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-before-show-day
+@type function(date dateobject)
+@description (from jqueryui api) A function that takes a date as a parameter and must return an array with: [0]: true/false indicating whether or not this date is selectable [1]: a CSS class name to add to the date's cell or "" for the default presentation [2]: an optional popup tooltip for this date. The function is called for each day in the datepicker before it is displayed.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-button-image
+@type string
+@description (from jqueryui api) A URL of an image to use to display the datepicker when the showOn option is set to "button" or "both". If set, the buttonText option becomes the alt value and is not directly displayed.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-button-image-only
+@type boolean
+@description (from jqueryui api) Whether the button image should be rendered by itself instead of inside a button element. This option is only relevant if the buttonImage option has also been set.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-button-text
+@type string
+@description (from jqueryui api) The text to display on the trigger button. Use in conjunction with the showOn option set to "button" or "both".
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-calculate-week
+@type function()
+@description (from jqueryui api) A function to calculate the week of the year for a given date. The default implementation uses the ISO 8601 definition: weeks start on a Monday; the first week of the year contains the first Thursday of the year.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-change-month
+@type boolean
+@description (from jqueryui api) Whether the month should be rendered as a dropdown instead of text.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-change-year
+@type boolean
+@description (from jqueryui api) Whether the year should be rendered as a dropdown instead of text. Use the yearRange option to control which years are made available for selection.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-close-text
+@type string
+@description (from jqueryui api) The text to display for the close link. Use the showButtonPanel option to display this button.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-constrain-input
+@type boolean
+@description (from jqueryui api) When true, entry in the input field is constrained to those characters allowed by the current dateFormat option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-current-text
+@type string
+@description (from jqueryui api) The text to display for the current day link. Use the showButtonPanel option to display this button.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-date-format
+@type string
+@description (from jqueryui api) The format for parsed and displayed dates. For a full list of the possible formats see the formatDate function.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-day-names
+@type array<string>
+@description (from jqueryui api) The list of long day names, starting from Sunday, for use as requested via the dateFormat option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-day-names-min
+@type array<string>
+@description (from jqueryui api) The list of minimised day names, starting from Sunday, for use as column headers within the datepicker.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-day-names-short
+@type array<string>
+@description (from jqueryui api) The list of abbreviated day names, starting from Sunday, for use as requested via the dateFormat option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-default-date
+@type object<Date>|number|string
+@description (from jqueryui api) Set the date to highlight on first opening if the field is blank. Specify either an actual date via a Date object or as a string in the current dateFormat, or a number of days from today (e.g. +7) or a string of values and periods ('y' for years, 'm' for months, 'w' for weeks, 'd' for days, e.g. '+1m +7d'), or null for today.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-duration
+@type string|number
+@description (from jqueryui api) Control the speed at which the datepicker appears, it may be a time in milliseconds or a string representing one of the three predefined speeds ("slow", "normal", "fast").
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-first-day
+@type number
+@description (from jqueryui api) Set the first day of the week: Sunday is 0, Monday is 1, etc.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-goto-current
+@type boolean
+@description (from jqueryui api) When true, the current day link moves to the currently selected date instead of today.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-hide-if-no-prev-next
+@type boolean
+@description (from jqueryui api) Normally the previous and next links are disabled when not applicable (see the minDate and maxDate options). You can hide them altogether by setting this attribute to true.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-is-RTL
+@type boolean
+@description (from jqueryui api) Whether the current language is drawn from right to left.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-max
+@type object<Date>|number|string
+@description (from jqueryui api) The maximum selectable date. When set to null, there is no maximum.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-min
+@type object<Date>|number|string
+@description (from jqueryui api) The minimum selectable date. When set to null, there is no minimum.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-month-names
+@type array<string>
+@description (from jqueryui api) The list of full month names, for use as requested via the dateFormat option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-month-names-short
+@type array<string>
+@description (from jqueryui api) The list of abbreviated month names, as used in the month header on each datepicker and as requested via the dateFormat option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-navigation-as-datepicker-format
+@type boolean
+@description (from jqueryui api) Whether the prevText and nextText options should be parsed as dates by the formatDate function, allowing them to display the target month names for example.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-next-text
+@type string
+@description (from jqueryui api) The text to display for the next month link. With the standard ThemeRoller styling, this value is replaced by an icon.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-number-of-months
+@type number|array<number>
+@description (from jqueryui api) Number: The number of months to display in a single row. Array: An array defining the number of rows and columns to display.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-on-change-month-year
+@type function(integer year,integer month,object inst)
+@description (from jqueryui api) Called when the datepicker moves to a new month and/or year. The function receives the selected year, month (1-12), and the datepicker instance as parameters. this refers to the associated input field.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-on-close
+@type function(string datetext,object inst)
+@description (from jqueryui api) Called when the datepicker is closed, whether or not a date is selected. The function receives the selected date as text ("" if none) and the datepicker instance as parameters. this refers to the associated input field.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-prev-text
+@type string
+@description (from jqueryui api) The text to display for the previous month link. With the standard ThemeRoller styling, this value is replaced by an icon.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-select-other-months
+@type boolean
+@description (from jqueryui api) Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-on-select
+@type function(string datetext,object inst)
+@description (from jqueryui api) Called when the datepicker is selected. The function receives the selected date as text and the datepicker instance as parameters. this refers to the associated input field.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-select-other-months
+@type boolean
+@description (from jqueryui api) Whether days in other months shown before or after the current month are selectable. This only applies if the showOtherMonths option is set to true.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-short-year-cutoff
+@type boolean
+@description (from jqueryui api) The cutoff year for determining the century for a date (used in conjunction with dateFormat 'y'). Any dates entered with a year value less than or equal to the cutoff year are considered to be in the current century, while those greater than it are deemed to be in the previous century.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-anim
+@type string
+@description (from jqueryui api) The name of the animation used to show and hide the datepicker. Use "show" (the default), "slideDown", "fadeIn", any of the jQuery UI effects. Set to an empty string to disable animation.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-button-panel
+@type boolean
+@description (from jqueryui api) Whether to display a button pane underneath the calendar. The button pane contains two buttons, a Today button that links to the current day, and a Done button that closes the datepicker. The buttons' text can be customized using the currentText and closeText options respectively.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-current-at-pos
+@type number
+@description (from jqueryui api) When displaying multiple months via the numberOfMonths option, the showCurrentAtPos option defines which position to display the current month in.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-month-after-year
+@type boolean
+@description (from jqueryui api) Whether to show the month after the year in the header.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-on
+@type string
+@description (from jqueryui api) When the datepicker should appear. The datepicker can appear when the field receives focus ("focus"), when a button is clicked ("button"), or when either event occurs ("both").
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-options
+@type object
+@description (from jqueryui api) If using one of the jQuery UI effects for the showAnim option, you can provide additional settings for that animation via this option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-other-months
+@type boolean
+@description (from jqueryui api) Whether to display dates in other months (non-selectable) at the start or end of the current month. To make these days selectable use the selectOtherMonths option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-show-week
+@type boolean
+@description (from jqueryui api) When true, a column is added to show the week of the year. The calculateWeek option determines how the week of the year is calculated. You may also want to change the firstDay option.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-step-months
+@type number
+@description (from jqueryui api) Set how many months to move when clicking the previous/next links.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-week-header
+@type string
+@description (from jqueryui api) The text to display for the week of the year column heading. Use the showWeek option to display this column.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-year-range
+@type string
+@description (from jqueryui api) The range of years displayed in the year drop-down: either relative to today's year ("-nn:+nn"), relative to the currently selected year ("c-nn:c+nn"), absolute ("nnnn:nnnn"), or combinations of these formats ("nnnn:-nn"). Note that this option only affects what appears in the drop-down, to restrict which dates may be selected use the minDate and/or maxDate options.
+
+#----------------------------------------------------------------------
+
+@attribute data-datepicker-year-suffix
+@type string
+@description (from jqueryui api) Additional text to display after the year in the month headers. 
+
+#--------------------- META
+
+@metaattribute data-is-datepicker
+@description This attribute exists when there's an active datepicker widget.

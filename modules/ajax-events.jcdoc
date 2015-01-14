@@ -1,0 +1,344 @@
+@module ajax-events
+@info This module contains the methods needed to handle with ajax
+
+#-------------------------------------------------------------------
+
+@attribute <b>data-ajax-events</b>
+@type string
+@description This attribute identifies the events that will trigger the reload ajax function.
+@graphicexample {Testing events}
+<div id="ajax" data-ajax-load="'resources/ajax.html'"
+data-ajax-avoid-first-loads="1"
+data-ajax-onload-done="function(){alert('ajax-loaded')}">
+</div>
+
+<div data-ajax-onevent-reload="'::prev'"
+ data-ajax-events="'click'">
+  Click me to load/reload ajax
+</div>
+{Testing events}
+
+#-------------------------------------------------------------------
+
+@attribute <b>data-ajax-onevent-reload</b> (Alive)
+@type selector
+@description This attribute identifies the target(s) that will be reloaded once the event gets triggered.
+@example {1. page.php}
+<html>
+    <body>
+        <p><?php echo $_GET["myinput"] ?></p>
+    </body>
+</html>
+{1. page.php}
+
+@example {2. index.html}
+<html>
+    <body>
+        <input type="text" value="something"
+         name="myinput"
+         data-ajax-onevent-reload="'::closest div'"
+         data-ajax-events="'input'">
+        
+        <div id="ajax"
+         data-ajax-load="'page.php'"
+         data-ajax-input-group="'input'">
+        </div>
+    </body>
+</html>
+{2. index.html}
+
+@example {3. Result after input}
+<html>
+    <body>
+        <input type="text" value="somethinga"
+         name="myinput"
+         data-ajax-onevent-reload="'::closest div'"
+         data-ajax-events="'input'">
+
+        <div id="ajax" ajax-load="'page.php'"
+         data-ajax-input-group="'input'">
+            <p>somethinga</p>
+        </div>
+    </body>
+</html>
+{3. Result after input}
+
+@graphicexample {Graphic Example}
+<input type="text" value="something"
+ name="myinput" data-ajax-onevent-reload="'::next div'"
+ data-ajax-events="'input'">
+
+<div id="ajax" data-ajax-load="'resources/ajax.html'"
+ data-ajax-input-group="'::prev input'"
+ data-ajax-avoid-first-loads="1"
+ data-ajax-onload-done="function(){alert('reloaded')}">
+</div>
+{Graphic Example}
+
+#-----------------------------------------------------------------
+
+@attribute data-ajax-number-id-change (Alive)
+@type number|function(current_id,element)->number
+@description This attribute holds the number that will be added or set for the attribute ajax-number-id inside that target.
+@example {1. page.php}
+<html>
+    <body>
+        <p><?php echo $_GET['id'] ?></p>
+    </body>
+</html>
+{1. page.php}
+
+@example {2. index.html}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+        data-ajax-number-id="1"></div>
+        
+        <div data-ajax-load="'page.php'"
+        data-ajax-number-id="2"></div>
+        
+        <button data-ajax-onevent-reload="'::prevAll div'"
+        data-ajax-events="'click'"
+        data-ajax-number-id-change="+1">
+            +1
+        </button>
+    </body>
+</html>
+{2. index.html}
+
+@example {3. Result}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+         data-ajax-number-id="1">
+            <p>1</p>
+        </div>
+        <div data-ajax-load="'page.php'"
+             data-ajax-number-id="2">
+            <p>2</p>
+        </div>
+        <button data-ajax-onevent-reload="'::prevAll div'"
+        data-ajax-events="'click'"
+        ajax-number-id-change="+1">
+            +1
+        </button>
+    </body>
+</html>
+{3. Result}
+f
+@example {4. Result after one click}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+             data-ajax-number-id="2">
+            <p>2</p>
+        </div>
+        <div data-ajax-load="'page.php'"
+           data-ajax-number-id="3">
+            <p>3</p>
+        </div>
+        <button data-ajax-onevent-reload="'::prevAll div'"
+        data-ajax-events="'click'"
+        data-ajax-number-id-change="+1">
+            +1
+        </button>
+    </body>
+</html>
+{4. Result after one click}
+
+#-----------------------------------------------------------------
+ 
+@attribute data-ajax-number-id-change-method (Alive)
+@type string[sum,set]
+@description Will sum or set the value of the attribute data-ajax-number-id-change to the attribute inside the ajax-target, if exists.
+@example {1. page.php}
+<html>
+    <body>
+        <p><?php echo $_GET['id'] ?></p>
+    </body>
+</html>
+{1. page.php}
+
+@example {2. index.html}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'" 
+        data-ajax-number-id="1"></div>
+        
+        <div data-ajax-load="'page.php'"
+        data-ajax-number-id="2"></div>
+        
+        <button data-ajax-onevent-reload="'::prevAll div'"
+         data-ajax-events="'click'"
+         data-ajax-number-id-change="getNextNumber"
+         data-ajax-number-id-change-method="'set'">
+            +1
+        </button>
+        
+        <script>
+            var getNextNumber = function(current_id,element) {
+                return(current_id + 1);
+            }
+        </script>
+    </body>
+</html>
+{2. index.html}
+
+@example {3. Result}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+         data-ajax-number-id="1">
+            <p>1</p>
+        </div>
+        <div data-ajax-load="'page.php'"
+         data-ajax-number-id="2">
+            <p>2</p>
+        </div>
+        <button data-ajax-onevent-reload="'::prevAll div'"
+         data-ajax-events="'click'"
+         data-ajax-number-id-change="getNextNumber"
+         data-ajax-number-id-change-method="'set'">
+            +1
+        </button>
+       
+        <script>
+            var getNextNumber = function(current_id,element) {
+                return(current_id + 1);
+            }
+        </script>
+    </body>
+</html>
+{3. Result}
+
+@example {4. Result after one click}
+<html>
+    <body>
+       <div data-ajax-load="'page.php'"
+        data-ajax-number-id="2">
+           <p>2</p>
+       </div>
+       <div data-ajax-load="'page.php'"
+        data-ajax-number-id="3">
+           <p>3</p>
+       </div>
+       <button data-ajax-onevent-reload="'::prevAll div'"
+        data-ajax-events="'click'"
+        data-ajax-number-id-change="getNextNumber"
+        data-ajax-number-id-change-method="'set'">
+           +1
+       </button>
+       <script>
+           var getNextNumber = function(current_id,element) {
+               return(current_id + 1);
+           }
+       </script>
+   </body>
+</html>
+{4. Result after one click}
+
+#-----------------------------------------------------------------------
+
+@attribute data-ajax-send-lang (Alive)
+@type boolean
+@description Defaults to false, will add a "lang" param to your data with the current lang (used for enclosed content) if avaliable.
+
+#-----------------------------------------------------------------
+
+@attribute data-ajax-filter-change (Alive)
+@type string|function(current_filter,element)->string
+@description This attribute holds the new filter for the attribute data-ajax-filter inside the target that should be reloaded.
+@example {1. page.php}
+<html>
+    <body>
+        <p><?php echo $_GET['filter'] ?></p>
+    </body>
+</html>
+{1. page.php}
+
+@example {2. index.html}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+         data-ajax-filter="'myfilter'">
+        </div>
+        
+        <div data-ajax-load="'page.php'"
+         data-ajax-filter="'otherfilter'">
+        </div>
+        
+        <button data-ajax-onevent-reload="'::prevAll div'"
+         data-ajax-events="'click'"
+         ajax-filter-change="changeFilter">
+            yes!
+        </button>
+        
+        <script>
+            var changeFilter = function(current_filter,element) {
+                return(current_filter + " yes!");
+            }
+        </script>
+    </body>
+</html>
+{2. index.html}
+
+@example {3. Result}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+         data-ajax-filter="'myfilter'">
+            <p>myfilter</p>
+        </div>
+        
+        <div data-ajax-load="'page.php'"
+         data-ajax-filter="'otherfilter'">
+            <p>otherfilter</p>
+        </div>
+        
+        <button data-ajax-onevent-reload="'::prevAll div'"
+         data-ajax-events="'click'"
+         data-ajax-filter-change="changeFilter">
+            yes!
+        </button>
+        
+        <script>
+            var changeFilter = function(current_filter,element) {
+                return(current_filter + " yes!");
+            }
+        </script>
+    </body>
+</html>
+{3. Result}
+
+@example {4. Result after one click}
+<html>
+    <body>
+        <div data-ajax-load="'page.php'"
+         data-ajax-filter="'myfilter yes!'">
+            <p>myfilter yes!</p>
+        </div>
+        
+        <div data-ajax-load="'page.php'"
+         data-ajax-filter="'otherfilter yes!'">
+            <p>otherfilter yes!</p>
+        </div>
+        
+        <button data-ajax-onevent-reload="'::prevAll div'"
+         data-ajax-events="'click'"
+         data-ajax-filter-change="changeFilter">
+            yes!
+        </button>
+        
+        <script>
+            var changeFilter = function(current_filter,element) {
+                return(current_filter + " yes!");
+            }
+        </script>
+    </body>
+</html>
+{4. Result after one click}
+
+#-----------------------------------------------------------------
+
+@metaattribute data-ajax-request-binds
+@description Contains the binds that will be removed when .jCheetahUnloadAjaxEvents is triggered, you shouldn't coerce values.

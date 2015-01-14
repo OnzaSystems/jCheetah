@@ -1,0 +1,235 @@
+@module animation-events
+@info This module allows you to perform animation over elements, based on jQuery.animate
+@see https://github.com/jqapi/jqapi#p=animate
+
+#---------------------Attributes
+
+@attribute <b>data-animation-events</b>
+@type string
+@description Describe the events that will fire the animation
+
+@graphicexample {Animate on click}
+<div class="btn btn-primary"
+ data-animation-events="'click'"
+ data-animation-properties="{'padding-left':'+=50'}">
+  Click me!
+</div>
+{Animate on click}
+
+#-----------------------------------------------------
+
+@attribute <b>data-animation-target</b> (Alive)
+@type selector
+@description Selects the target that will perform the described animation, defaults to ::this
+
+@graphicexample {Animate button}
+<div>I'm animated by the button</div>
+<button class="btn btn-primary"
+ data-animation-events="'click'"
+ data-animation-target="'::prev'"
+ data-animation-properties="{'padding-left':'+=50'}">
+  Animate previous
+</button>
+{Animate button}
+
+#------------------------------------------------------
+
+@attribute <b>data-animation-times</b> (Alive)
+@type number
+@description Describes how many times the animation can be fired.
+
+@graphicexample {Animates only five times}
+<div>I'm animated by the button</div>
+<button class="btn btn-primary"
+ data-animation-events="'click'"
+ data-animation-target="'::prev'"
+ data-animation-properties="{'padding-left':'+=50'}"
+ data-animation-times="5">
+  Animate previous
+</button>
+{Animates only five times}
+
+#---------------------------------------------------------
+
+@attribute <b>data-animation-set-other-trigger-forward</b> (Alive)
+@type selectors
+@description Causes the animation-n meta-attribute to be augmented by 1.
+
+@graphicexample {Animates only five times, regardless the button}
+<div>I'm animated by the button</div>
+<button class="btn btn-primary"
+ data-animation-events="'click'"
+ data-animation-target="'::prev'"
+ data-animation-properties="{'padding-left':'+=50'}"
+ data-animation-times="5"
+ data-animation-set-other-trigger-forward="'::next button'">
+  Animate previous
+</button>
+<button class="btn btn-primary"
+ data-animation-events="'click'"
+ data-animation-target="'::prev ::prev'"
+ data-animation-properties="{'padding-left':'+=50'}"
+ data-animation-times="5"
+ data-animation-set-other-trigger-forward="'::prev button'">
+  Animate div
+</button>
+{Animates only five times, regardless the button}
+
+#---------------------------------------------------------
+
+@attribute <b>data-animation-set-other-trigger-backward</b> (Alive)
+@type selectors
+@description Causes the animation-n meta-attribute to be reduced by 1.
+
+@graphicexample {Slider}
+<div>Slide me</div>
+<button class="btn btn-primary pull-left"
+ data-animation-events="'click'"
+ data-animation-target="'::prev'"
+ data-animation-properties="{'padding-left':'-=50'}"
+ data-animation-times="5"
+ data-animation-n="5"
+ data-animation-set-other-trigger-backward="'::next button'">
+  Move left
+</button>
+<button class="btn btn-primary pull-right"
+ data-animation-events="'click'"
+ data-animation-target="'::prev ::prev'"
+ data-animation-properties="{'padding-left':'+=50'}"
+ data-animation-times="5"
+ data-animation-set-other-trigger-backward="'::prev button'">
+  Move right
+</button>
+{Slider}
+
+#--------------------------------------------------------------
+
+@attribute <b>data-animation-properties</b> (Alive)
+@type object
+@description (from jqapi) An object of CSS properties and values that the animation will move toward.
+
+@example {Animate on click}
+<html>
+  <body>
+    <div class="btn btn-primary"
+     data-animation-events="'click'"
+     data-animation-properties="props">
+      Click me!
+    </div>
+    <script>
+      var props = {'padding-left':'+=50',
+                   'margin-top':'140px',
+                   'padding':'19px'};
+    </script>
+{Animate on click}
+
+#-----------------------------------------------------------
+
+@attribute <b>data-animation-duration</b> (Alive)
+@type number|string
+@description (from jqapi) A string or number determining how long the animation will run. 
+
+@graphicexample {Slow animation}
+<div class="btn btn-primary"
+ data-animation-events="'click'"
+ data-animation-properties="{'padding-left':'+=50'}"
+ data-animation-duration="'slow'">
+  Click me!
+</div>
+{Slow animation}
+
+#------------------------------------------------------------
+
+@attribute data-animation-easing (Alive)
+@type string
+@description (from jqapi) A string indicating which easing function to use for the transition.
+
+@attribute data-animation-queue (Alive)
+@type boolean|string
+@description (from jqapi) A Boolean indicating whether to place the animation in the effects queue. If false, the animation will begin immediately. As of jQuery 1.7, the queue option can also accept a string, in which case the animation is added to the queue represented by that string. When a custom queue name is used the animation does not automatically start; you must call .dequeue("queuename") to start it. 
+
+@attribute data-animation-special-easing (Alive)
+@type object
+@description (from jqapi) A map of one or more of the CSS properties defined by the properties argument and their corresponding easing functions.
+
+@attribute data-animation-step (Alive)
+@type function(Number now,Tween tween)
+@description (from jqapi) A function to be called for each animated property of each animated element. This function provides an opportunity to modify the Tween object to change the value of the property before it is set. 
+
+@attribute data-animation-progress (Alive)
+@type function(promise animation,number progress,number remainingMs)
+@description (from jqapi) A function to be called after each step of the animation, only once per animated element regardless of the number of animated properties
+
+@attribute data-animation-complete (Alive)
+@type function
+@description (from jqapi) A function to call once the animation is complete.
+
+@attribute data-animation-start (Alive)
+@type function
+@description (from jqapi) A function to call when the animation begins.
+
+@attribute data-animation-done (Alive)
+@type function(Promise animation,Boolean jumpedToEnd)
+@description (from jqapi) A function to be called when the animation completes (its Promise object is resolved)
+
+@attribute data-animation-fail (Alive)
+@type function(Promise animation,Boolean jumpedToEnd)
+@description (from jqapi) A function to be called when the animation fails to complete (its Promise object is rejected).
+
+@attribute data-animation-always (Alive)
+@type function(Promise animation,Boolean jumpedToEnd)
+@description (from jqapi) A function to be called when the animation completes or stops without completing (its Promise object is either resolved or rejected).
+
+
+#----------------------- META
+
+@metaattribute data-animation-n
+@description Says how many times the animation was performed, you can coerce a value
+
+@example {Animates once}
+<html>
+  <body>
+    <div>I'm animated by the button</div>
+    <button data-animation-events="'click'"
+     data-animation-target="'::prev'"
+     data-animation-properties="{'padding-left':'+=50'}"
+     data-animation-times="5"
+     data-animation-n="4">
+      Animate previous
+    </button>
+  </body>
+</html>
+{Animates once}
+
+@metaattribute data-animation-disabled
+@description set to 1 to say it's disabled 0 otherwise, you can coerce a value.
+
+@example {Animation trigger}
+<html>
+  <body>
+    <div>I'm animated by the button</div>
+    <button data-animation-events="'click'"
+     data-animation-target="'::prev'"
+     data-animation-properties="{'padding-left':'+=50'}"
+     data-animation-times="5"
+     data-animation-disabled="0">
+      Animate
+    </button>
+    <button data-jcevent="'click'"
+     data-jcevent-target="'::prev'"
+     data-jcevent-function="toggleAnimation">
+    </button>
+    <script>
+      var toggleAnimation = function(event,target) {
+         var $target = $(target);
+         var current_val = parseInt($target.attr("data-animation-disabled"));
+         var inverse = 1 - current_val;
+         $target.attr("data-animation-disabled",inverse);
+      }
+    </script>
+  </body>
+</html>
+{Animation trigger}
+
+@metaattribute data-animation-events-binds
+@description Contains the events that were bind, these are removed when .jCheetahUnloadAnimationEvents is ran. Do not coerce a value.

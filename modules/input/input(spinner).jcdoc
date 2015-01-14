@@ -1,0 +1,92 @@
+@module input(spinner)
+@info Handles spinner fields using jQuery's ui spinner, lang HTML attribute allows to set the culture from Globalize.
+@see http://api.jqueryui.com/spinner.html
+
+#-------------------------------------------------------------------
+
+@attribute <b>data-spinner-type</b>
+@type string[integer,float]
+@description Selects the type of number to use in the spinner, by default it's integer.
+
+@graphicexample {Example}
+<select value="float"
+data-jcevent="'change'"
+data-jcevent-function="'attrjCheetah'"
+data-jcevent-target="'#my_spinner_test'"
+data-jcevent-args="['data-spinner-type',$(this).val()]">
+	<option>float</option>
+	<option>integer</option>
+</select>
+<input id="my_spinner_test"
+ data-jctype="'spinner'"
+ data-spinner-type="'float'">
+{Example}
+
+#--------------------------------------------------------------------
+
+@attribute <b>data-spinner-step</b>
+@type number
+@description Chooses the step for the spinner, by default it's 0.25 to floating point numbers, 0.2 to floating point numbers with only 1 decimal precision and 1 to integers.
+
+@graphicexample {Example}
+<input data-jctype="'spinner'" data-spinner-step="4">
+{Example}
+
+#--------------------------------------------------------------------
+
+@attribute <b>data-spinner-min</b>
+@type number
+@description Specifies the min allowed value (strict).
+
+@graphicexample {Example}
+<input data-jctype="'spinner'" data-spinner-type="'float'" data-spinner-min="0">
+{Example}
+
+#--------------------------------------------------------------------
+
+@attribute <b>data-spinner-max</b>
+@type number
+@description Specifies the max allowed value (strict).
+
+@graphicexample {Example}
+<input data-jctype="'spinner'" data-spinner-type="'float'" data-spinner-min="0" data-spinner-max="30">
+{Example}
+
+#---------------------------------------------------------------------
+
+@attribute data-spinner-disabled
+@type boolean
+@description (from jqueryui api) Disables the spinner if set to true.
+
+@graphicexample {Example}
+<input data-jctype="'spinner'" data-spinner-disabled="true">
+{Example}
+
+#---------------------------------------------------------------------
+
+@attribute spinner-icons
+@type object{'down': class, 'up':class}
+@description (from jqueryui api) Icons to use for buttons, matching an icon provided by the jQuery UI CSS Framework. Defauls to {down: "ui-icon-triangle-1-s", up:"ui-icon-triangle-1-n"}
+
+#----------------------------------------------------------------------
+
+@attribute data-spinner-incremental
+@type boolean|function(number_of_spins)->number
+@description (from jqueryui api) Controls the number of steps taken when holding down a spin button. When set to true, the stepping delta will increase when spun incessantly. When set to false, all steps are equal (as defined by the step option). As a function receives one parameter: the number of spins that have occurred. Must return the number of steps that should occur for the current spin.
+
+#----------------------------------------------------------------------
+
+@attribute data-spinner-format
+@type string
+@description (from jqueryui api) Format of numbers passed to Globalize, if available. Most common are "n" for a decimal number and "C" for a currency value. Also see the culture option.
+
+#----------------------------------------------------------------------
+
+@attribute data-spinner-culture
+@type string
+@description By default it's set to the current lang (from jqueryui api) Sets the culture to use for parsing and formatting the value. If null, the currently set culture in Globalize is used, see Globalize docs for available cultures. Only relevant if the numberFormat option is set. Requires Globalize to be included.
+
+#--------------- META
+
+@metaattribute data-is-spinner
+@description This attribute exists when there's an active spinner widget.

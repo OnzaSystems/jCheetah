@@ -1,0 +1,2 @@
+CREATE AGGREGATE FUNCTION json RETURNS STRING SONAME 'lib_mysqludf_jcheetah.so';
+CREATE AGGREGATE FUNCTION csv RETURNS STRING SONAME 'lib_mysqludf_jcheetah.so';

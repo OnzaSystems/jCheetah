@@ -1,0 +1,76 @@
+@module dialog-events
+@info Extension to module dialog to interact with existant dialogs.
+@see http://api.jqueryui.com/dialog/
+
+#-------------------------------------------------------------------------------
+
+@attribute <b>data-dialog-events</b>
+@type string
+@description Sets the events that will trigger the dialog interaction.
+
+@graphicexample {Create Dialog Event}
+<button data-dialog-events="'mouseover'"
+ data-dialog-target="'#dialog_evnt_example'"
+ id="dialog_evnt_example_btn">
+  Don't get over me
+</button>
+    
+<div id="dialog_evnt_example" data-dialog="'I meant NO'"
+  data-dialog-position="{'my':'left top','at':'left bottom','of':'#dialog_evnt_example_btn'}">
+  Don't get over that button!
+</div>
+{Create Dialog Event}
+
+#-------------------------------------------------------------------------------
+
+@attribute <b>data-dialog-target</b> (Alive)
+@type selector
+@description Specifies the target that will appear, do not use special :: selectors as they don't work because ui changes the position of elements.
+
+@graphicexample {Create Dialog Event}
+<select>
+	<option>1</option>
+	<option>2</option>
+</select>
+<button data-dialog-events="'click'"
+ data-dialog-target="#function(){return '#dialog_evnt_example2_' + $(this).prev().val()}"
+ id="dialog_evnt_example_btn2">
+  Open
+</button>
+    
+<div id="dialog_evnt_example2_1" data-dialog="'#1'"
+  data-dialog-position="{'my':'left top','at':'left bottom','of':'#dialog_evnt_example_btn2'}">
+  You targeted dialog #1
+</div>
+
+<div id="dialog_evnt_example2_2" data-dialog="'#2'"
+  data-dialog-position="{'my':'left bottom','at':'left top','of':'#dialog_evnt_example_btn2'}">
+  You targeted dialog #2
+</div>
+{Create Dialog Event}
+
+#-------------------------------------------------------------------------------
+
+@attribute data-dialog-action (Alive)
+@type string
+@description Specifies the method that will be run, by default it's set to 'show'.
+
+@example {Close a dialog}
+<html>
+  <body>
+    
+    <div id="dialog" data-dialog="'title'"
+     data-dialog-auto-open="true">
+      <button data-dialog-events="'click'"
+       data-dialog-action="'close'"
+       fata-dialog-target="'#dialog'">Close</button>
+    </div>
+    
+  </body>
+</html>
+{Close a dialog}
+
+#-------------------------------------------------------------------------------
+
+@metaattribute data-dialog-events-binds
+@description Holds the events that were bind, they're removed when data-dialog-events is removed, do not coerce a value.

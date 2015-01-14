@@ -1,0 +1,66 @@
+@module autocomplete
+@info This module allows you to create quick autocomplete fields using jQuery.ui.autocomplete
+@see http://api.jqueryui.com/autocomplete/
+
+#--------------------------------------------------------------------------------------
+
+@attribute <b>data-autocomplete-source</b>
+@type string|array|function(object request,function response(object data))
+@description (from jqueryui api) Defines the data to use, must be specified. An array of strings: [ "Choice1", "Choice2" ]. An array of objects with label and value properties: [ { label: "Choice1", value: "value1" }, ... ] . When a string is used, the Autocomplete plugin expects that string to point to a URL resource that will return JSON data. It can be on the same host or on a different one (must provide JSONP). The Autocomplete plugin does not filter the results, instead a query string is added with a term field, which the server-side script should use for filtering the results. For example, if the source option is set to "http://example.com" and the user types foo, a GET request would be made to http://example.com?term=foo. The data itself can be in the same format as the local data described above. The third variation, a callback, provides the most flexibility and can be used to connect any data source to Autocomplete.
+
+@graphicexample {1. Autocomplete}
+<input type="text"
+ class="form-control"
+ placeholder="hint me"
+ data-autocomplete-source="['hint','second hint','third hint']">
+</body>
+{1. Autocomplete}
+
+@example {2. fields.php}
+<?php $hints = array('hint','second hint','third hint');
+foreach ($hints as $key => $hint){
+    if (is_number(strpos($hint,$_GET["term"]))) {
+        echo "$hint\n";
+    }
+}?>
+{2. fields.php}
+
+@example {3. Autocomplete via url}
+<html>
+  <body>
+    <input type="text"
+     data-autocomplete-source="'fields.php'">
+  </body>
+</html>
+{3. Autocomplete via url}
+
+#--------------------------------------------------------------------------------------
+
+@attribute data-autocomplete-append-to
+@type selector
+@description (from jqueryui api) Which element the menu should be appended to. When the value is null, the parents of the input field will be checked for a class of ui-front. If an element with the ui-front class is found, the menu will be appended to that element. Regardless of the value, if no element is found, the menu will be appended to the body.
+
+@attribute data-autocomplete-auto-focus
+@type boolean
+@description (from jqueryui api) If set to true the first item will automatically be focused when the menu is shown.
+
+@attribute data-autocomplete-delay
+@type number
+@description (from jqueryui api) The delay in milliseconds between when a keystroke occurs and when a search is performed. A zero-delay makes sense for local data (more responsive), but can produce a lot of load for remote data, while being less responsive.
+
+@attribute data-autocomplete-disabled
+@type boolean
+@description (from jqueryui api) Disables the autocomplete if set to true.
+
+@attribute data-autocomplete-min-length
+@type number
+@description (from jqueryui api) The minimum number of characters a user must type before a search is performed. Zero is useful for local data with just a few items, but a higher value should be used when a single character search could match a few thousand items.
+
+@attribute data-autocomplete-position
+@type object
+@description (from jqueryui api) Identifies the position of the suggestions menu in relation to the associated input element. The of option defaults to the input element, but you can specify another element to position against. You can refer to the jQuery UI Position utility for more details about the various options.
+
+#--------------------------------------------------------------------------------------
+
+@metaattribute data-is-autocomplete
+@description Exists when there's an autocomplete widget set, do not coerce a value.
